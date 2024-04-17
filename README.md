@@ -1,7 +1,7 @@
-<H1 align="center">Flutter Teste Unitário</H1>
-<p align="center">🚀 Desenvolvimento de uma estrutura contendo mocktail para teste unitário para referências futuras</p>
+<H1 align="center">Flutter Unit Test</H1>
+<p align="center">🚀 Development of a framework containing mocktail for unit testing for future references</p>
 
-## Recursos Utilizados
+## Resources Used
 - Flutter 3.3.5
 - Auth ^8.2.0+02
 - Firebase_core 2.24.2
@@ -10,23 +10,23 @@
 
 
 
-## Teste unitário de cadastro
+## Registration unit test
 
-Comentário para cada função do código de teste unitário:
+Comment for each function of the unit test code:
 
 <div align="center">
-  <img src="https://github.com/lucasmargui/Flutter_Estrutura_TesteUnitario/assets/157809964/0360f531-520b-415f-8107-c8517a32f218" style="width:70%">
+ <img src="https://github.com/lucasmargui/Flutter_Estrutura_TesteUnitario/assets/157809964/0360f531-520b-415f-8107-c8517a32f218" style="width:70%">
 </div>
 
 
 
 ```
-test('Test signUp success', () async 
+test('Test signUp success', () async
 
 ```
 
 
-- Início do teste unitário que verifica o sucesso do registro de um usuário.
+- Start of the unit test that verifies the success of a user registration.
 
 
 ```
@@ -34,7 +34,7 @@ final mockUser = MockUser();
 
 ```
 
-- Cria uma instância de um usuário mockado para simular o comportamento de um usuário durante o teste.
+- Creates an instance of a mocked user to simulate a user's behavior during testing.
 
 
 ```
@@ -42,8 +42,8 @@ final expectedUser = UserModel(name: 'John', email: 'john@example.com', id: '123
 
 ```
 
-- Define um usuário esperado com informações específicas para verificar se o registro foi bem-sucedido.
-  
+- Defines an expected user with specific information to check whether registration was successful.
+
 
 
 ```
@@ -51,79 +51,74 @@ when(() => mockFirebaseAuth.createUserWithEmailAndPassword(email: any(named: 'em
 
 ```
 
-- Configura o comportamento do método createUserWithEmailAndPassword do FirebaseAuth para retornar uma instância de MockUserCredential quando chamado.
+- Configures the behavior of the FirebaseAuth createUserWithEmailAndPassword method to return an instance of MockUserCredential when called.
 
 ```
 when(() => mockFirebaseAuth.currentUser).thenReturn(mockUser);
 
 ```
 
-- Configura o método currentUser do FirebaseAuth para retornar o usuário mockado mockUser.
+- Configures FirebaseAuth's currentUser method to return the mocked user mockUser.
 
 ```
 when(() => mockUser.updateDisplayName(any())).thenAnswer((_) async {});
 
 ```
 
-- Configura o método updateDisplayName do usuário mockado para não fazer nada, apenas retornar uma operação assíncrona vazia.
+- Configures the mocked user's updateDisplayName method to do nothing, just return an empty asynchronous operation.
 
 ```
 when(() => mockFirebaseAuth.currentUser!.displayName).thenReturn('John');
 
 ```
 
-- Configura o nome do usuário atual no FirebaseAuth como 'John'.
+- Sets the current user name in FirebaseAuth to 'John'.
 
 ```
 when(() => mockFirebaseAuth.currentUser!.email).thenReturn('john@example.com');
 
 ```
 
-- Configura o e-mail do usuário atual no FirebaseAuth como 'john@example.com'.
+- Configures the current user's email in FirebaseAuth as 'john@example.com'.
 
 ```
 ### when(() => mockFirebaseAuth.currentUser!.uid).thenReturn('123');
 
 ```
 
-- Configura o UID (identificador único) do usuário atual no FirebaseAuth como '123'.
+- Sets the current user's UID (unique identifier) ​​in FirebaseAuth to '123'.
 
 ```
 when(() => mockFirebaseAuthService.signUp(name: 'User', email: 'user@email.com', password: 'user@123')).thenAnswer((_) async => expectedUser);
 
 ```
 
-- Configura o método signUp do serviço de autenticação do Firebase para retornar expectedUser quando chamado com os parâmetros especificados.
+- Configures the Firebase authentication service's signUp method to return expectedUser when called with the specified parameters.
 
 ```
 final result = await mockFirebaseAuthService.signUp(name: 'User', email: 'user@email.com', password: 'user@123');
 
 ```
 
-- Chama o método signUp com dados de teste e armazena o resultado para verificação.
+- Calls the signUp method with test data and stores the result for verification.
 
 ```
 expect(result.name, expectedUser.name);
 
 ```
 
-- Verifica se o nome retornado após o registro é igual ao nome esperado.
+- Checks whether the name returned after registration is the same as the expected name.
 
 ```
 expect(result.email, expectedUser.email);
 
 ```
 
-- Verifica se o e-mail retornado após o registro é igual ao e-mail esperado.
+- Checks if the email returned after registration is the same as the expected email.
 
 ```
 expect(result.id, expectedUser.id);
 
 ```
 
-- Verifica se o ID retornado após o registro é igual ao ID esperado.
-
-
-
-
-
+- Checks whether the ID returned after registration is the same as the expected ID.
